@@ -1,0 +1,273 @@
+---
+title: "Tester_Tutorial"
+output: html_document
+date: "2024-04-18"
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+library(gradethis)
+library(palmerpenguins)
+knitr::opts_chunk$set(echo = FALSE)
+gradethis::gradethis_setup()
+```
+
+
+## Topic 1
+
+1. **Select species and bill_length_mm [Code]**:
+
+Write a code snippet to select the columns "species" and "bill_length_mm" from a data frame named "df".
+
+```{r ex1, exercise = TRUE}
+library(gato365dsh2024)
+library(dplyr)
+library(palmerpenguins)
+
+df = penguins
+
+### Write your Code Below
+
+
+
+###
+
+```
+
+```{r ex1-solution, exercise.reveal_solution = FALSE}
+library(gato365dsh2024)
+library(dplyr)
+library(palmerpenguins)
+
+df %>% select(species, bill_length_mm)
+
+```
+
+```{r ex1-check}
+grade_this({
+  pass_if_equal(.solution_all, "Great")
+  fail(hint = TRUE)
+})
+```
+
+2. **Write a code use group_by and summarise [Code]**:
+
+Write a code snippet that group the penguins by island and summarise by the mean of bill_length_mm ignoring empty values(use , na.rm = TRUE).
+
+
+```{r ex2, exercise = TRUE}
+library(gato365dsh2024)
+library(dplyr)
+library(palmerpenguins)
+
+df = penguins
+
+### Write your Code Below
+
+
+
+###
+
+```
+
+```{r ex2-solution, exercise.reveal_solution = FALSE}
+library(gato365dsh2024)
+library(dplyr)
+library(palmerpenguins)
+
+df <- df %>%
+  group_by(island) %>%
+  summarise(mean(bill_length_mm, na.rm = TRUE))
+
+print(df)
+
+
+```
+
+```{r ex2-check}
+grade_this({
+  pass_if_equal(.solution_all, "Great")
+  fail(hint = TRUE)
+})
+```
+
+3. **Create a column called 'body_mass_kg' [Code]**:
+
+Write a code snippet that create a new column called 'body_mass_kg' by dividing the column 'body_mass_g' by 1000.
+
+```{r ex3, exercise = TRUE}
+library(gato365dsh2024)
+library(dplyr)
+library(palmerpenguins)
+
+df = penguins
+
+### Write your Code Below
+
+
+
+###
+
+```
+
+```{r ex3-solution, exercise.reveal_solution = FALSE}
+library(gato365dsh2024)
+library(dplyr)
+library(palmerpenguins)
+
+df <- df %>%
+  mutate(body_mass_kg = body_mass_g / 1000)
+
+print(df)
+
+#
+
+library(gato365dsh2024)
+library(dplyr)
+library(palmerpenguins)
+
+df %>%
+  mutate(body_mass_kg = body_mass_g / 1000)
+
+print(df)
+
+
+
+```
+
+```{r ex3-check}
+grade_this({
+  pass_if_equal(.solution_all, "Great")
+  fail(hint = TRUE)
+})
+```
+
+4. **Write code that filter out [Code]**:
+
+Write a code that filter out when bill_length_mm is larger than 30 mm AND bill_depth_mm is larger than 18 mm. 
+
+```{r ex4, exercise = TRUE}
+library(dplyr)
+library(palmerpenguins)
+
+df = penguins
+
+### Write your Code Below
+
+
+
+###
+
+```
+
+```{r ex4-solution, exercise.reveal_solution = FALSE}
+library(gato365dsh2024)
+library(dplyr)
+library(palmerpenguins)
+
+df %>%
+  filter(bill_length_mm > 39, bill_depth_mm > 18)
+
+#
+
+library(gato365dsh2024)
+library(dplyr)
+library(palmerpenguins)
+
+df <- df %>%
+  filter(bill_length_mm > 39, bill_depth_mm > 18)
+
+
+```
+
+```{r ex4-check}
+grade_this({
+  pass_if_equal(.solution_all, "Great")
+  fail(hint = TRUE)
+})
+```
+
+5. **Write code for flipper_length_mm [Code]**:
+
+1. Select the code that group the penguins by species
+
+2. Create a new column called summary_mean recording the mean using column flipper_length_mm with ignoring empty values ()
+
+
+```{r ex5, exercise = TRUE}
+library(dplyr)
+library(palmerpenguins)
+
+df = penguins
+
+### Write your Code Below
+
+
+
+###
+
+```
+
+```{r ex5-solution, exercise.reveal_solution = FALSE}
+library(gato365dsh2024)
+library(dplyr)
+library(palmerpenguins)
+
+df <- df %>%
+  group_by(species) %>% 
+  summarise(summary_mean = mean(flipper_length_mm, na.rm = TRUE))
+
+
+
+
+```
+
+```{r ex5-check}
+grade_this({
+  pass_if_equal(.solution_all, "Great")
+  fail(hint = TRUE)
+})
+```
+
+**MULTIPLE CHOICE**
+
+```{r quiz}
+quiz(
+  question("If I want to select species type of penguin, what verb should I use?",
+    answer("SELECT", correct = TRUE),
+    answer("MUTATE"),
+    answer("SUMMARISE"),
+    answer("ARRANGE"),
+    answer("FILTER")
+  ),
+  question("If I convert all of the weights of the penguin into a new column in the same data frame?",
+    answer("SELECT"),
+    answer("MUTATE", correct = TRUE),
+    answer("SUMMARISE"),
+    answer("ARRANGE"),
+    answer("FILTER")
+  ),
+  question("If I want flipper_length_mm to be sorted in ascending order?",
+    answer("SELECT"),
+    answer("MUTATE"),
+    answer("SUMMARISE"),
+    answer("ARRANGE", correct = TRUE),
+    answer("FILTER")
+  ),
+  question("If I want to find the mean for three groups with in my data?",
+    answer("SELECT"),
+    answer("MUTATE"),
+    answer("SUMMARISE", correct = TRUE),
+    answer("ARRANGE"),
+    answer("FILTER")
+  ),
+  question("If I want to filter out penguins with bill_length_mm over 30 mm?",
+    answer("SELECT"),
+    answer("MUTATE"),
+    answer("SUMMARISE"),
+    answer("ARRANGE"),
+    answer("FILTER", correct = TRUE)
+  )
+  )
+
+```
